@@ -1,1 +1,1 @@
-echo > index.php "<?php include_once('snake.html'); ?>"
+<?php include_once('snake.html'); ?>"
