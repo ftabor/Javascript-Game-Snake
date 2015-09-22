@@ -4,6 +4,9 @@ var COLS=26, ROWS=26;
 //IDs
 var EMPTY=0, SNAKE=1, FRUIT=2;
 
+//Directions
+var LEFT=0, UP=1, RIGHT:2, DOWN=3;
+
 var grid = {
 
 	width:  null
@@ -69,17 +72,64 @@ function setFood() {
 	grid.set(FRUIT, randpos.x, randpos.y) 
 }
 
+//Game Objects
+var canvas, ctx, keystate, frames;
+
 function main() {
+	canvas = document.createElement("canvas");
+	canvas.width = COL*20;
+	canvas.height = ROWS*20;
+	ctx = canvas.getContext("2d");
+	document.body.appendChild(canvas);
+
+	frames = 0;
+	keystate = {};
+
+	init();
+	loop();
 
 }
 
-function init(){}
+function init(){
+	grid.init(EMPTY, COLS, ROWS);
 
-function loop() {}
+	var sp = {x:Math.floor(COLS/2), y:ROWS-1};
+	snake.init(UP, sp.x, sp.y);
+	grid.set(SNAKE, sp.x, sp.y);
 
-function update() {}
+	setFood();
+}
 
-function draw() {}
+function loop() {
+	update();
+	draw();
+
+	window.requestAnimationFrame(loop, canvas);
+}
+
+function update() {
+	frames++;
+}
+
+function draw() {
+	var tw = canvas.width/grid.width;
+	var th = canvas.height/grid.height;
+
+	for (var x=0; x < grid.width; x++) {
+		for (var y=0; < grid.heigh; y++) {
+			switch (grid.get(x, y)) {
+				case EMPTY:
+					ctx.fillStyle = "#fff";
+				case SNAKE:
+					ctx.fillStyle = "#0ff";
+				case FRUIT:
+					ctx.fillStyle = "#f00";
+			}
+			ctx.fillRect(x*tx, y+th, tw, th);
+
+		}
+	}
+}
 
 main();
 
