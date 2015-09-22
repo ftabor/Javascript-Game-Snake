@@ -19,7 +19,26 @@ var grid = {
 	},
 
 	get: function(x, y) {
+
+	}
+}
+
+var snake = {
+
+	direction: null,
+	_queue: 	 null, 
+
+	init: function(d, x, y) {
+
+	},
+
+	insert: function(x, y) {
+
+	},
+
+	remove: function() {
 		
 	}
+
 }
 
